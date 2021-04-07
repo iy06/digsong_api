@@ -1,6 +1,7 @@
 class Api::SongsController < ApplicationController
+  after_action :all_songs
+
   def index
-    @songs = Song.order("created_DESC")
   end
 
   def create
@@ -17,5 +18,14 @@ class Api::SongsController < ApplicationController
 
   def song_parameter
     params.permit(:title, :key, :bpm, :song_data)
+  end
+
+  def all_songs
+    @songs = Song.order("created_DESC")
+    render :songs
+  end
+
+  def select_songs
+    @song = Song.find(params[:id])
   end
 end
