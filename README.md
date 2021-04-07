@@ -1,24 +1,12 @@
-# README
+DigSong_Api　DB設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# songsテーブル
 
-Things you may want to cover:
+|Column|Type|Options|
+|------|----|-------|
+|title|string|null: false|
+|key|string||
+|bpm|integer||
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# songsアソシエーション
+- has_one_attached :song_data (active_storage)
