@@ -3,7 +3,7 @@ json.array! @songs do |song|
   json.title     song.title
   json.key       song.key
   json.bpm       song.bpm
-  # imageとsong_dataのファイル情報を渡す
-  json.song_data song.song_data.blob
-  json.image     song.image.blob
+  # imageとsong_dataのファイル情報をURL化して返す
+  json.song_data (request.protocol + request.host_with_port + url_for(song.song_data))
+  json.image     (request.protocol + request.host_with_port + url_for(song.image))
 end
