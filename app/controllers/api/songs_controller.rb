@@ -4,6 +4,7 @@ class Api::SongsController < ApplicationController
   end
 
   def create
+    binding.pry
     Song.create(song_params)
     all_songs
   end
@@ -18,7 +19,7 @@ class Api::SongsController < ApplicationController
 
   private
 
-  def song_parameter
+  def song_params
     params.permit(:title, :key, :bpm, :image, :song_data)
   end
 
