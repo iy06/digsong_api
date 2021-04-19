@@ -1,0 +1,23 @@
+# 画像ファイルと音楽ファイルをデコードする際に必要になるかもしれないコード
+# 画像ファイルのデコード
+def decode_image(image_params)
+  # image_file = replace_filename(image_params)
+  blob_image = ActiveStorage::Blob.create_after_upload!(
+    io: StringIO.new(params[:image].to_path()),
+    filename: image_params.original_filename
+  )
+  # blob_image = ActiveStorage::Blob.create_after_upload!(
+  #   io: StringIO.new(Base64.decode64(image_params.tempfile)),
+  #   filename: image_params.original_filename
+  # )
+  @song.image.attach(blob_image)
+end
+# 音楽ファイルのデコード
+def decode_song_data(song_data_params)
+  # song_data_file = replace_filename(song_data_params)
+  blob_song_data = ActiveStorage::Blob.create_after_upload!(
+    io: StringIO.new(Base64.decode64(song_data_params)),
+    filename: song_data_params.original_filename
+  )
+  @song.song_data.attach(blob_song_data)
+end
