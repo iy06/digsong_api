@@ -4,9 +4,10 @@ class Api::SongsController < ApplicationController
   end
 
   def create
-    binding.pry
-    Song.create(song_params)
-    all_songs
+    @song = Song.new(song_params)
+    if @song.save
+      all_songs
+    end
   end
 
   def update
