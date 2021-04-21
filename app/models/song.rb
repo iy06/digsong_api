@@ -8,11 +8,9 @@ class Song < ApplicationRecord
     validates :title
     validates :key
     validates :bpm
-    # validates :image
-    # validates :song_data
-    validates :image_presence
-    validates :song_data_presence
   end
+  validate :image_presence
+  validate :song_data_presence
   # 画像データがattachされているか、content_typeが正常かのカスタムバリデーション
   def image_presence
     if image.attached?
