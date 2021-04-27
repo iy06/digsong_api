@@ -1,4 +1,6 @@
 class Api::SongsController < ApplicationController
+  before_action :select_song, only: [ :destroy ]
+
   def index
     all_songs
   end
@@ -26,6 +28,7 @@ class Api::SongsController < ApplicationController
   end
 
   def destroy
+    @song.destroy
     all_songs
   end
 
