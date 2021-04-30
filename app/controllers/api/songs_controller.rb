@@ -1,5 +1,5 @@
 class Api::SongsController < ApplicationController
-  before_action :select_song, only: [ :destroy ]
+  before_action :select_song, only: [:destroy, :update]
 
   def index
     all_songs
@@ -24,7 +24,20 @@ class Api::SongsController < ApplicationController
   end
 
   def update
-    all_songs
+    # 画像データがあればattachする
+    if params[:image] != ""
+      @song.image.attach(params[:image])
+    end
+    # 音楽データがあればattachする
+    if params[:song_data] != ""
+      @song.song_data.attach(params[:song_data])
+    end
+    if @song.update(song_params)
+      all_songs
+    else
+      @error_messages = @song.errors.messages
+      error_songs
+    end
   end
 
   def destroy
