@@ -8,7 +8,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # 全てのURLからのリクエストを受け付ける
-    origins '*', "#{ ENV['DIGSONG_API_URL'] }"
+    origins '*', "#{Rails.application.credentials.DIGSONG_API_URL}"
 
     resource '*',
       headers: :any,
